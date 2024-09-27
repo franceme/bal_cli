@@ -18,21 +18,26 @@ jobs:
         run: sudo apt-get install -y zip unzip
 
       - name: Install SDK and Graalvm
-        run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk i java 23-graalce
+        run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk i java 23-graalce && sdk i ballerina
 
       - name: Install zip unzip
+        if: false
         run: sudo cp $HOME/.sdkman/candidates/java/23-graalce/lib/svm/bin/native-image $HOME/.sdkman/candidates/java/23-graalce/bin/native-image
 
       - name: Show
         run: ls -altr $HOME/.sdkman/candidates/java/23-graalce/bin
 
       - name: Ballerina Build
+        if: false
         uses: ballerina-platform/ballerina-action@master
         with:
           args: 
             build --graalvm
         env:
           GRAALVM_HOME: $HOME/.sdkman/candidates/java/23-graalce
+
+      - name: Install zip unzip
+        run: GRAALVM_HOME=HOME/.sdkman/candidates/java/23-graalce bal build --graalvm
 
       - name: Ballerina Push
         if: false
