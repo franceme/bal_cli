@@ -35,5 +35,8 @@ jobs:
         if: false 
         run: bal build --graalvm
 
+      - name: hello world
+        run: docker run helloworld
+
       - name: Build the docker image #https://hub.docker.com/r/frantzme/ballerina/tags
         run: docker run --rm -u 0 -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite bal build --graalvm
