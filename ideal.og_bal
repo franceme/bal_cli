@@ -16,19 +16,16 @@ import ballerina/regex;
 public function main(string[] values=[]) {
     string keyname="";
     string keyvalue="";
-    string keyprefix="=";
 
     map<string> arguments = {};
 
     foreach string value in values {
-        if value.startsWith(keyprefix) && keyvalue == "" {
-            io:println(value);
-            keyname=regex:replace(value,keyprefix,"", 1);
+        if value.startsWith("-") && keyvalue == "" {
+            keyname=regex:replaceAll(value,"-","");
         }
         else if keyname != "" {
             keyname = "";
             arguments[keyname] = value;
-            io:println(value);
         }
     }
     io:println(arguments);

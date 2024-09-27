@@ -1,5 +1,8 @@
 graal=/root/.sdkman/candidates/java/23-graalce
 
+prep:
+	sdk i java 23-graalce
+
 build:
 	bal build
 
@@ -10,6 +13,9 @@ run:
 buildjar:
 	GRAALVM_HOME=$(graal) bal build --graalvm
 	mv target/bin/cli.jar ./cli.jar
+
+ex: buildjar
+	java -jar cli.jar =help this
 
 #Uses info from the Cloud.toml file
 builddocker:
