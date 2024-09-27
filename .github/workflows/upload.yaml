@@ -37,7 +37,7 @@ jobs:
           GRAALVM_HOME: $HOME/.sdkman/candidates/java/23-graalce
 
       - name: Install zip unzip
-        run: source "$HOME/.sdkman/bin/sdkman-init.sh" && GRAALVM_HOME=HOME/.sdkman/candidates/java/23-graalce bal build --graalvm
+        run: GRAALVM_HOME=HOME/.sdkman/candidates/java/23-graalce $HOME/.sdkman/candidates/ballerina/current/bin/bal build --graalvm
 
       - name: Ballerina Push
         if: false
