@@ -25,7 +25,13 @@ jobs:
         run: sudo cp $HOME/.sdkman/candidates/java/23-graalce/lib/svm/bin/native-image $HOME/.sdkman/candidates/java/23-graalce/bin/native-image
 
       - name: Show
-        run: ls -altr $HOME/.sdkman/candidates/java/23-graalce/bin
+        run: ls -altr $HOME/.sdkman/candidates/ballerina
+
+      - name: Show
+        run: ls -altr $HOME/.sdkman/candidates/ballerina/current
+
+      - name: Show
+        run: ls -altr $HOME/.sdkman/candidates/ballerina/current/bin
 
       - name: Ballerina Build
         if: false
@@ -36,7 +42,7 @@ jobs:
         env:
           GRAALVM_HOME: $HOME/.sdkman/candidates/java/23-graalce
 
-      - name: Install zip unzip
+      - name: Main Executing
         run: GRAALVM_HOME=HOME/.sdkman/candidates/java/23-graalce $HOME/.sdkman/candidates/ballerina/current/bin/bal build --graalvm
 
       - name: Ballerina Push
