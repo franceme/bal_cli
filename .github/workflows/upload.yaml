@@ -32,7 +32,7 @@ jobs:
         run: docker logout
 
       - name: Stupid step since github actions
-        run: service docker restart
+        run: sudo service docker restart
 
       - name: Docker Login
         if: true
