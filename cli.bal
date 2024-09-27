@@ -1,5 +1,5 @@
 import ballerina/io;
-import ballerina/regex;
+
 
 //Paramenters and default values
 //https://ballerina.io/learn/by-example/function-pointers
@@ -21,14 +21,15 @@ public function main(string[] values=[]) {
     map<string> arguments = {};
 
     foreach string value in values {
-        if value.startsWith(keyprefix) && keyvalue == "" {
+        if value.startsWith(keyprefix) && keyname == "" {
             io:println(value);
-            keyname=regex:replace(value,keyprefix,"", 1);
+            keyname=value.substring(1,value.length());
+            io:println(keyname);
         }
         else if keyname != "" {
-            keyname = "";
             arguments[keyname] = value;
             io:println(value);
+            keyname="";
         }
     }
     io:println(arguments);
