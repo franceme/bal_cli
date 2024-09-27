@@ -43,3 +43,24 @@ jobs:
 
       - name: Build the docker image #https://hub.docker.com/r/frantzme/ballerina/tags
         run: docker run --rm -u 0 -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite bal build --graalvm
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: Release_${{ steps.time.outputs.time }}
+          release_name: Release_${{ steps.time.outputs.time }}
+
+      # https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+      - name: Upload Website Data to the Release
+        id: upload-release-asset-website-data
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ${{ github.workspace }}/target/bin/cli.jar
+          asset_name: cli.jar
+          asset_content_type: application/java-archive
