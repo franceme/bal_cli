@@ -13,14 +13,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-    
+
+      - name: Install zip unzip
+        run: apt-get install -y zip unzip
+
+      - name: Install SDK and Graalvm
+        run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk i java 23-graalce
+
       - name: Ballerina Build
         uses: ballerina-platform/ballerina-action@master
         with:
           args: 
-            pack
+            build --graalvm
+        env:
+          GRAALVM_HOME: $HOME/.sdkman/candidates/java/23-graalce
 
       - name: Ballerina Push
+        if: false
         uses: ballerina-platform/ballerina-action@master
         with:
           args: 
