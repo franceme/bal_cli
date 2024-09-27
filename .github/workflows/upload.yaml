@@ -7,45 +7,10 @@ on:
 
 jobs:
   build:
-    
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-
-      - name: Install zip unzip
-        if: false
-        run: sudo apt-get install -y zip unzip
-
-      - name: Install SDK and Graalvm
-        if: false
-        run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && yes|sdk i java 23-graalce && yes|sdk i java 8.0.422-amzn && sdk i ballerina
-
-      - name: Install SDK and Graalvm
-        if: true
-        run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && yes|sdk i java 23-graalce
-
-      - name: Show
-        if: false
-        run: ls -altr $HOME/.sdkman/candidates/ballerina
-
-      - name: Ballerina Build
-        if: false
-        uses: ballerina-platform/ballerina-action@master
-        with:
-          args: 
-            build --graalvm
-        env:
-          GRAALVM_HOME: $HOME/.sdkman/candidates/java/23-graalce
-
-      - name: Main Executing
-        if: false
-        run: GRAALVM_HOME=HOME/.sdkman/candidates/java/23-graalce $HOME/.sdkman/candidates/ballerina/current/bin/ballerina build --graalvm
-
-      - name: Main Executing
-        if: false 
-        run: bal build --graalvm
 
       - name: Build the docker image
         run: docker run -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite bal build --graalvm
