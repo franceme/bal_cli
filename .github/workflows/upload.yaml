@@ -24,6 +24,7 @@ jobs:
         run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && yes|sdk i java 23-graalce && yes|sdk i java 8.0.422-amzn && sdk i ballerina
 
       - name: Show
+        if: false
         run: ls -altr $HOME/.sdkman/candidates/ballerina
 
       - name: Ballerina Build
