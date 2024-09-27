@@ -42,4 +42,4 @@ jobs:
           password: ${{secrets.DOCKER_TOKEN}}
 
       - name: Build the docker image #https://hub.docker.com/r/frantzme/ballerina/tags
-        run: docker run --rm -u 0 -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk i java 23-graalce && bal build --graalvm
+        run: docker run --rm -u 0 -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite "$HOME/.sdkman/bin/sdkman-init.sh" && sdk i java 23-graalce && bal build --graalvm
