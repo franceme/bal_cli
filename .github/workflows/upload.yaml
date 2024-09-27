@@ -21,7 +21,7 @@ jobs:
         run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk i java 23-graalce
 
       - name: Show
-        run: ls -altr $HOME/.sdkman/candidates/java/23-graalce
+        run: ls -altr $HOME/.sdkman/candidates/java/23-graalce/bin
 
       - name: Ballerina Build
         uses: ballerina-platform/ballerina-action@master
