@@ -9,29 +9,21 @@ jobs:
   build:
     
     runs-on: ubuntu-latest
+    container: frantzme/ballerina:lite
     
     steps:
       - name: Checkout
         uses: actions/checkout@v1
 
       - name: Install zip unzip
+        if: false
         run: sudo apt-get install -y zip unzip
 
       - name: Install SDK and Graalvm
         run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && yes|sdk i java 23-graalce && yes|sdk i java 8.0.422-amzn && sdk i ballerina
 
-      - name: Install zip unzip
-        if: false
-        run: sudo cp $HOME/.sdkman/candidates/java/23-graalce/lib/svm/bin/native-image $HOME/.sdkman/candidates/java/23-graalce/bin/native-image
-
       - name: Show
         run: ls -altr $HOME/.sdkman/candidates/ballerina
-
-      - name: Show
-        run: ls -altr $HOME/.sdkman/candidates/ballerina/current
-
-      - name: Show
-        run: ls -altr $HOME/.sdkman/candidates/ballerina/current/bin
 
       - name: Ballerina Build
         if: false
@@ -43,7 +35,11 @@ jobs:
           GRAALVM_HOME: $HOME/.sdkman/candidates/java/23-graalce
 
       - name: Main Executing
+        if: false
         run: GRAALVM_HOME=HOME/.sdkman/candidates/java/23-graalce $HOME/.sdkman/candidates/ballerina/current/bin/ballerina build --graalvm
+
+      - name: Main Executing
+        run: bal build --graalvm
 
       - name: Ballerina Push
         if: false
