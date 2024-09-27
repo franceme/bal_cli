@@ -12,13 +12,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Docker Login
-        if: false
-        uses: docker/login-action@v2.0.0
-        with:
-          username: frantzme
-          password: ${{secrets.DOCKER_TOKEN}}
-
       - name: Install SDK and Graalvm
         if: false
         run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && yes|sdk i java 23-graalce
@@ -37,6 +30,13 @@ jobs:
 
       - name: Stupid step since github actions
         run: docker logout
+
+      - name: Docker Login
+        if: true
+        uses: docker/login-action@v2.0.0
+        with:
+          username: frantzme
+          password: ${{secrets.DOCKER_TOKEN}}
 
       - name: hello world
         run: docker run helloworld
