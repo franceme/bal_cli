@@ -9,7 +9,6 @@ jobs:
   build:
     
     runs-on: ubuntu-latest
-    container: frantzme/ballerina:lite
 
     steps:
       - name: Checkout
@@ -45,7 +44,11 @@ jobs:
         run: GRAALVM_HOME=HOME/.sdkman/candidates/java/23-graalce $HOME/.sdkman/candidates/ballerina/current/bin/ballerina build --graalvm
 
       - name: Main Executing
+        if: false 
         run: bal build --graalvm
+
+      - name: Build the docker image
+        run: docker run -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite bal build --graalvm
 
       - name: Ballerina Push
         if: false
