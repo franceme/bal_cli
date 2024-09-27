@@ -35,14 +35,11 @@ jobs:
         run: sudo service docker restart
 
       - name: Docker Login
-        if: true
+        if: false
         uses: docker/login-action@v2.0.0
         with:
           username: frantzme
           password: ${{secrets.DOCKER_TOKEN}}
-
-      - name: hello world
-        run: docker run helloworld
 
       - name: Build the docker image #https://hub.docker.com/r/frantzme/ballerina/tags
         run: docker run --rm -u 0 -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite bal build --graalvm
