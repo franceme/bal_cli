@@ -18,7 +18,7 @@ jobs:
         run: sudo apt-get install -y zip unzip
 
       - name: Install SDK and Graalvm
-        run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && sdk i java 23-graalce && sdk i ballerina
+        run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && yes|sdk i java 23-graalce && yes|sdk i java 8.0.422-amzn && sdk i ballerina
 
       - name: Install zip unzip
         if: false
