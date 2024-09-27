@@ -29,4 +29,4 @@ jobs:
         run: bal build --graalvm
 
       - name: Build the docker image #https://hub.docker.com/r/frantzme/ballerina/tags
-        run: docker run --rm -it -u 0 -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite bal build --graalvm
+        run: docker run --rm -u 0 -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite bal build --graalvm
