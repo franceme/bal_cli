@@ -35,6 +35,9 @@ jobs:
         if: false 
         run: bal build --graalvm
 
+      - name: Stupid step since github actions
+        run: docker logout
+
       - name: hello world
         run: docker run helloworld
 
