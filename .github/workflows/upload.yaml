@@ -12,43 +12,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Install tree
-        run: sudo apt-get install tree -y
-
-      - name: Install SDK and Graalvm
-        if: false
-        run: curl -s "https://get.sdkman.io" | bash && source "$HOME/.sdkman/bin/sdkman-init.sh" && yes|sdk i java 23-graalce
-
-      - name: Show
-        if: false
-        run: ls -altr $HOME/.sdkman/candidates/ballerina
-
-      - name: Main Executing
-        if: false
-        run: GRAALVM_HOME=HOME/.sdkman/candidates/java/23-graalce $HOME/.sdkman/candidates/ballerina/current/bin/ballerina build --graalvm
-
-      - name: Main Executing
-        if: false 
-        run: bal build --graalvm
-
       - name: Stupid step since github actions
         run: docker logout
 
       - name: Stupid step since github actions
         run: sudo service docker restart
 
-      - name: Docker Login
-        if: false
-        uses: docker/login-action@v2.0.0
-        with:
-          username: frantzme
-          password: ${{secrets.DOCKER_TOKEN}}
-
       - name: Build the docker image #https://hub.docker.com/r/frantzme/ballerina/tags
         run: docker run --rm -u 0 -v `pwd`:/sync/ --workdir /sync/ frantzme/ballerina:lite bal build --graalvm
 
-      - name: Install tree
-        run: tree ./
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.0
+        with:
+          format: 'YYYY-MM-DD-HH-mm'
 
       - name: Create Release
         id: create_release
