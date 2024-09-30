@@ -1,4 +1,4 @@
 [container.image]
 repository="franceme"
-name="hello"
+name="cli"
 tag="v0.0.0"
